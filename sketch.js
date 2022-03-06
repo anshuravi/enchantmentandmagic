@@ -1,12 +1,12 @@
 let micVar;
 let mic;
 let myEnchantments = [];
+let sketchStarted = false
 
 function setup() {
   createCanvas(500, 500);
   angleMode(DEGREES);
-  mic = new p5.AudioIn();
-  mic.start();
+  createButton("Enchant").mousePressed(startSketch);
   for (let i = 0; i < 300; i++) {
     let x = random(200, 350);
     let y = random(300, 156);
@@ -14,46 +14,58 @@ function setup() {
   }
 }
 
+function startSketch(){
+  mic = new p5.AudioIn();
+  mic.start();
+
+  sketchStarted = true;
+}
+
 function draw() {
-  background(109, 104, 149);
-  for (let i = 0; i < 300; i++) {
-    myEnchantments[i].display();
-    myEnchantments[i].move();
-  }
-  //mic setup
-  micVar = map(mic.getLevel(), 0, 0.1, 0, 245);
-  line(mouseX, 0, mouseX, 100);
-  noStroke();
-  push();
-  if (mouseX > 300) {
-    // Set colors
-    fill(131, 242, 161, 130);
-    stroke(127, 63, 120);
-    // magic flower right
-    translate(150, 100);
-    noStroke();
-    for (let i = 0; i < 10; i++) {
-      ellipse(0, 10, 20, 100);
-      rotate(frameCount / 10.0);
+
+  if(sketchStarted){
+    background(109, 104, 149);
+    for (let i = 0; i < 300; i++) {
+      myEnchantments[i].display();
+      myEnchantments[i].move();
     }
-  } else {
-    fill(131, 242, 161, 130);
-    // magic flower left
-    translate(400, 390);
+    //mic setup
+    micVar = map(mic.getLevel(), 0, 0.1, 0, 245);
+    line(mouseX, 0, mouseX, 100);
     noStroke();
-    for (let i = 0; i < 10; i++) {
-      ellipse(0, 10, 20, 100);
-      rotate(frameCount / 10.0);
+    push();
+    if (mouseX > 300) {
+      // Set colors
+      fill(131, 242, 161, 130);
+      stroke(127, 63, 120);
+      // magic flower right
+      translate(150, 100);
+      noStroke();
+      for (let i = 0; i < 10; i++) {
+        ellipse(0, 10, 20, 100);
+        rotate(frameCount / 10.0);
+      }
+    } else {
+      fill(131, 242, 161, 130);
+      // magic flower left
+      translate(400, 390);
+      noStroke();
+      for (let i = 0; i < 10; i++) {
+        ellipse(0, 10, 20, 100);
+        rotate(frameCount / 10.0);
+      }
     }
+    pop();
+    angleMode(DEGREES);
+    translate(width / 2, height / 2);
+    arms();
+    hand();
+    fingers();
+    magic();
+    stars(35, 50, 100);
+
   }
-  pop();
-  angleMode(DEGREES);
-  translate(width / 2, height / 2);
-  arms();
-  hand();
-  fingers();
-  magic();
-  stars(35, 50, 100);
+
 }
 
 function arms() {
