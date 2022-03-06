@@ -1,7 +1,7 @@
 let micVar;
 let mic;
 let myEnchantments = [];
-let sketchStarted = false;
+let sketchStarted = false
 
 function setup() {
   createCanvas(500, 500);
@@ -15,7 +15,7 @@ function setup() {
 }
 
 function startSketch(){
-  mic = new p5.AudioIn()
+  mic = new p5.AudioIn();
   mic.start();
 
   sketchStarted = true;
