@@ -1,12 +1,12 @@
 let micVar;
 let mic;
 let myEnchantments = [];
-let sketchStarted = false;
 
 function setup() {
   createCanvas(500, 500);
   angleMode(DEGREES);
-  createButton("Enchant").mousePressed(startSketch);
+  mic = new p5.AudioIn();
+  mic.start();
   for (let i = 0; i < 300; i++) {
     let x = random(200, 350);
     let y = random(300, 156);
@@ -14,16 +14,8 @@ function setup() {
   }
 }
 
-function startSketch(){
-  mic = new p5.AudioIn();
-  mic.start();
-
-  sketchStarted = true;
-}
-
 function draw() {
-
-  if(sketchStarted){background(109, 104, 149);
+  background(109, 104, 149);
   for (let i = 0; i < 300; i++) {
     myEnchantments[i].display();
     myEnchantments[i].move();
@@ -62,9 +54,6 @@ function draw() {
   fingers();
   magic();
   stars(35, 50, 100);
-
-  }
-
 }
 
 function arms() {
